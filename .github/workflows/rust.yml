@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run check
       run: just check
@@ -23,6 +24,7 @@ jobs:
     needs: check
     steps:
     - uses: actions/checkout@v4
+    - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run build
       run: just build --verbose
@@ -32,6 +34,7 @@ jobs:
     needs: check
     steps:
     - uses: actions/checkout@v4
+    - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run test
       run: just test --verbose
@@ -40,6 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run format
       run: just format --check
