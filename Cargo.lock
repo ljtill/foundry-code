@@ -5,3 +5,7 @@ version = 4
 [[package]]
 name = "foundry-code"
 version = "0.1.0"
+
+[[package]]
+name = "foundry-core"
+version = "0.1.0"
