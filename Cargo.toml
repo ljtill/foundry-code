@@ -1,6 +1,9 @@
 [workspace]
-members = ["crates/core"]
+members = ["crates/core", "crates/cli", "crates/tui"]
 resolver = "2"
+
+[workspace.dependencies]
+anyhow = "1.0"
 
 [package]
 name = "foundry-code"
@@ -8,6 +11,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+anyhow = { workspace = true }
+foundry-cli = { path = "crates/cli" }
+foundry-tui = { path = "crates/tui" }
 
 [[bin]]
 name = "foundry"

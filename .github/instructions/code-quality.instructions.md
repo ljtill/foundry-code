@@ -7,16 +7,18 @@ applyTo: "**/*.rs"
 
 ## Rust Best Practices
 - Follow project conventions and established coding style
+- Use Rust 2024 edition consistently across all crates (set `edition = "2024"` in all Cargo.toml files)
 - Use standard development tools as defined in the Justfile:
   - `just format` for consistent formatting
   - `just lint` for clippy linting
   - `just check` for cargo check validation
-- Implement proper error handling patterns appropriate for the Rust ecosystem
+- Implement proper error handling patterns using `anyhow::Result<()>` and `.context()` for descriptive errors
 - Include appropriate inline documentation for public APIs
 
 ## Architecture Compliance
-- Respect the established modular crate organization
+- Respect the established modular crate organization with separate CLI, TUI, and core crates
 - Keep core functionality in `crates/core` as established
+- Place CLI logic in `crates/cli` and TUI logic in `crates/tui`
 - Place main application logic in `src/bin/foundry.rs`
 - Propose new crates in `crates/` directory for distinct feature sets
 - Follow the workspace dependency management patterns
