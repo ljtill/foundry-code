@@ -1,17 +1,17 @@
-build:
-    cargo build
+build *args="":
+    cargo build {{args}}
 
 run:
     cargo run
 
-test:
-    cargo test
+test *args="":
+    cargo test {{args}}
 
 check:
     cargo check
 
-format:
-    cargo fmt
+format *args="":
+    cargo fmt {{args}}
 
 lint:
     cargo clippy
