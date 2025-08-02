@@ -10,9 +10,7 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 - **Core Crate**: `crates/core` - `foundry-core` library crate (currently empty, ready for core functionality)
 - **Modular Design**: Additional feature crates should be added to `crates/` directory following the same pattern
 
-## Development Workflow
-
-### Build System
+## Build System & Tools
 - **Primary Tool**: `just` (Justfile) for common commands
   - `just build` - Build the project
   - `just run` - Run the binary
@@ -21,18 +19,15 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
   - `just format` - Format code
   - `just lint` - Run clippy linter
 - **Direct Cargo**: Standard Cargo commands work as expected
+- **Binary name**: `foundry` (defined in Cargo.toml)
+- **Built binary location**: `target/debug/foundry`
 
-### Binary Execution
-- Binary name: `foundry` (defined in Cargo.toml)
-- Run with: `cargo run` or `just run`
-- Built binary location: `target/debug/foundry`
-
-### Code Organization Patterns
-- Main binary logic should go in `src/bin/foundry.rs`
-- Root-level shared functionality in `src/lib.rs` (currently unused)
-- Core functionality belongs in `crates/core/src/lib.rs` (`foundry-core` crate)
-- New feature crates should follow the pattern: `crates/{feature}/` with their own `Cargo.toml`
-- Workspace dependencies are managed at the root `Cargo.toml` level
+## Code Organization
+- Main binary logic: `src/bin/foundry.rs`
+- Root-level shared functionality: `src/lib.rs` (currently unused)
+- Core functionality: `crates/core/src/lib.rs` (`foundry-core` crate)
+- New feature crates: `crates/{feature}/` with their own `Cargo.toml`
+- Workspace dependencies: Managed at the root `Cargo.toml` level
 
 ## CI/CD Pipeline
 - **GitHub Actions**: `.github/workflows/rust.yml`
@@ -41,15 +36,8 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
   - Uses Ubuntu latest runner
 - **Dependabot**: Configured for weekly Cargo updates and daily GitHub Actions updates
 
-## Development Guidelines
-- Follow Rust 2024 edition conventions
-- Use `cargo fmt` for consistent formatting (available via `just format`)
-- Use `cargo clippy` for linting (available via `just lint`)
-- Ensure all code passes `cargo check` before committing
-- Write tests for new functionality - run with `just test`
-
 ## Current State
-- **Binary**: Contains minimal "Hello, world!" implementation in `src/bin/foundry.rs`
+- **Binary**: Minimal "Hello, world!" implementation in `src/bin/foundry.rs`
 - **Libraries**: Both `src/lib.rs` and `crates/core/src/lib.rs` are empty placeholders
 - **Tests**: No test files exist yet - structure ready for implementation
 - **Dependencies**: No external dependencies defined in either workspace or core crate
@@ -61,8 +49,8 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 - `src/bin/foundry.rs` - Main application entry point
 - `.github/workflows/rust.yml` - CI pipeline configuration
 
-## Future Architecture Notes
-- Project is set up as a workspace with `foundry-core` as the first member crate
-- `crates/` directory follows the pattern for feature-based modularization
-- Consider adding new crates to workspace members when implementing distinct features
-- Root-level library (`src/lib.rs`) remains available for binary-specific code
+## Technical Architecture
+- Rust 2024 edition with workspace structure
+- `foundry-core` as the first member crate for core functionality
+- Feature-based modularization using `crates/` directory
+- Root-level library available for binary-specific shared code
