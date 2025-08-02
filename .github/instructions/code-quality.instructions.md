@@ -16,18 +16,13 @@ applyTo: "**/*.rs"
 - Include appropriate inline documentation for public APIs
 
 ## Architecture Compliance
-- Respect the established modular crate organization with separate CLI, TUI, and core crates
-- Keep core functionality in `crates/core` as established
-- Place CLI logic in `crates/cli` and TUI logic in `crates/tui`
-- Place main application logic in `src/bin/foundry.rs`
-- Propose new crates in `crates/` directory for distinct feature sets
+- Respect the established modular crate organization (see copilot-instructions.md for details)
 - Follow the workspace dependency management patterns
+- Propose new crates in `crates/` directory for distinct feature sets
 
 ## Testing Requirements
-- Write tests for new functionality
+- Write tests for new functionality (see testing-standards.instructions.md for details)
 - Run tests with `just test` to ensure they pass
-- Include both unit tests and integration tests where appropriate
-- Follow Rust testing conventions and patterns
 
 ## Documentation Standards
 - Document public APIs with clear examples

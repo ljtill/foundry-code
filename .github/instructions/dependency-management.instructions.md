@@ -35,4 +35,4 @@ Only suggest crates that meet ALL of the following criteria:
 - Always use `edition = "2024"` for consistency across all crates
 - Use workspace dependency inheritance where possible (e.g., `anyhow = { workspace = true }`)
 - Follow the established crate naming pattern: `foundry-{feature}`
-- Place new crates in the `crates/` directory following the existing structure
+- Place new crates in the `crates/` directory (see copilot-instructions.md for structure details)
