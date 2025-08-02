@@ -3,6 +3,15 @@
 ## Project Overview
 This is a Rust binary project named "foundry-code" using Rust 2024 edition. The project follows a workspace structure with a single binary target named "foundry" and modular crate organization featuring separate CLI and TUI interfaces.
 
+## AI Instruction System
+This project uses specialized instruction files in `.github/instructions/` for comprehensive AI guidance:
+- `development-workflow.instructions.md` - Implementation planning and approval processes
+- `dependency-management.instructions.md` - Crate addition rules and version management
+- `code-quality.instructions.md` - Rust standards and architecture compliance
+- `testing-standards.instructions.md` - Test coverage and quality requirements
+
+These files are automatically applied by VS Code when relevant file patterns are matched.
+
 ## Architecture & Structure
 - **Binary Target**: `src/bin/foundry.rs` - Main executable entry point that routes to CLI or TUI
 - **Root Library**: `src/lib.rs` - Empty placeholder for binary-specific shared code
@@ -35,8 +44,10 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 ## CI/CD Pipeline
 - **GitHub Actions**: `.github/workflows/rust.yml`
   - Triggers on pushes and PRs to `main` branch
-  - Runs `cargo build --verbose` and `cargo test --verbose`
-  - Uses Ubuntu latest runner
+  - Uses custom `setup-just` action to install Just command runner
+  - Parallel job execution: check, build, test, and lint jobs
+  - Uses `just` commands: `just check`, `just build --verbose`, `just test --verbose`, `just format --check`, `just lint`
+  - Ubuntu latest runner with comprehensive validation pipeline
 - **Dependabot**: Configured for weekly Cargo updates and daily GitHub Actions updates
 
 ## Current State
@@ -56,21 +67,17 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 - `src/bin/foundry.rs` - Main application entry point
 - `tests/integration_tests.rs` - Integration test suite for binary functionality
 - `.github/workflows/rust.yml` - CI pipeline configuration
+- `.github/instructions/` - Specialized AI instruction files for workflow, dependency management, and code quality
 
 ## Dependencies
 - **Workspace-level**: `anyhow = "1.0"` for error handling across all crates
-- **CLI Dependencies**: `clap = "4.5"` with derive features for argument parsing
-- **TUI Dependencies**: `ratatui = "0.27"` and `crossterm = "0.27"` for terminal interface
+- **CLI Dependencies**: `clap = "4.5"` with derive features for argument parsing, `foundry-core` for shared logic
+- **TUI Dependencies**: `ratatui = "0.29"` and `crossterm = "0.29"` for terminal interface, `foundry-core` for shared logic
 - **Core Dependencies**: `anyhow` (workspace) ready for business logic implementation
 
 ## Usage Patterns
 - **CLI Mode**: `foundry --version` or `foundry --help` for command-line operations
 - **TUI Mode**: `foundry` (no arguments) launches the interactive terminal interface
-
-## Testing Strategy
-- **Foundation Testing**: Comprehensive unit and integration tests (16 tests total)
-- **Test Coverage**: CLI (5 tests), TUI (6 tests), Core (1 test), Integration (4 tests)
-- **Test Commands**: Use `just test` or `cargo test` to run all tests
 
 ## Technical Architecture
 - Rust 2024 edition consistently across all crates in the workspace
