@@ -1,3 +1,7 @@
+[workspace]
+members = ["crates/core"]
+resolver = "2"
+
 [package]
 name = "foundry-code"
 version = "0.1.0"
