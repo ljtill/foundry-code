@@ -44,7 +44,7 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 - **CLI Interface**: Working command-line interface with `--version` and `--help` flags
 - **TUI Interface**: Functional terminal UI with welcome screen and quit instructions
 - **Libraries**: `src/lib.rs` and `crates/core/src/lib.rs` are empty placeholders ready for implementation
-- **Tests**: No test files exist yet - structure ready for implementation
+- **Tests**: Comprehensive test suite with 16 tests covering all crates and integration scenarios
 - **Error Handling**: All crates use `anyhow::Result` for consistent error handling
 
 ## Key Files
@@ -54,6 +54,7 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 - `crates/tui/Cargo.toml` - TUI crate configuration with ratatui and crossterm dependencies
 - `Justfile` - Development command shortcuts
 - `src/bin/foundry.rs` - Main application entry point
+- `tests/integration_tests.rs` - Integration test suite for binary functionality
 - `.github/workflows/rust.yml` - CI pipeline configuration
 
 ## Dependencies
@@ -65,6 +66,11 @@ This is a Rust binary project named "foundry-code" using Rust 2024 edition. The 
 ## Usage Patterns
 - **CLI Mode**: `foundry --version` or `foundry --help` for command-line operations
 - **TUI Mode**: `foundry` (no arguments) launches the interactive terminal interface
+
+## Testing Strategy
+- **Foundation Testing**: Comprehensive unit and integration tests (16 tests total)
+- **Test Coverage**: CLI (5 tests), TUI (6 tests), Core (1 test), Integration (4 tests)
+- **Test Commands**: Use `just test` or `cargo test` to run all tests
 
 ## Technical Architecture
 - Rust 2024 edition consistently across all crates in the workspace

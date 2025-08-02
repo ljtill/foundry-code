@@ -15,7 +15,6 @@ use ratatui::{
 use std::io;
 
 pub fn run() -> anyhow::Result<()> {
-    // Setup terminal
     enable_raw_mode().context("Failed to enable raw mode")?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen, EnableMouseCapture)
@@ -25,7 +24,6 @@ pub fn run() -> anyhow::Result<()> {
 
     let result = run_app(&mut terminal);
 
-    // Restore terminal
     disable_raw_mode().context("Failed to disable raw mode")?;
     execute!(
         terminal.backend_mut(),
@@ -43,10 +41,8 @@ fn run_app(terminal: &mut Terminal<CrosstermBackend<io::Stdout>>) -> anyhow::Res
         terminal.draw(ui).context("Failed to draw UI")?;
 
         if let Event::Key(key) = event::read().context("Failed to read input event")? {
-            match key.code {
-                KeyCode::Char('q') => break,
-                KeyCode::Esc => break,
-                _ => {}
+            if should_quit(key.code) {
+                break;
             }
         }
     }
@@ -75,4 +71,76 @@ fn ui(f: &mut Frame) {
     let instructions = Paragraph::new("Press 'q' or 'Esc' to quit")
         .block(Block::default().borders(Borders::ALL).title("Instructions"));
     f.render_widget(instructions, chunks[1]);
+}
+
+pub fn should_quit(key_code: KeyCode) -> bool {
+    matches!(key_code, KeyCode::Char('q') | KeyCode::Esc)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ratatui::{Terminal, backend::TestBackend};
+
+    #[test]
+    fn test_should_quit_with_q() {
+        assert!(should_quit(KeyCode::Char('q')));
+    }
+
+    #[test]
+    fn test_should_quit_with_esc() {
+        assert!(should_quit(KeyCode::Esc));
+    }
+
+    #[test]
+    fn test_should_not_quit_with_other_keys() {
+        assert!(!should_quit(KeyCode::Char('a')));
+        assert!(!should_quit(KeyCode::Enter));
+        assert!(!should_quit(KeyCode::Char(' ')));
+        assert!(!should_quit(KeyCode::Up));
+    }
+
+    #[test]
+    fn test_ui_rendering() {
+        let backend = TestBackend::new(40, 10);
+        let mut terminal = Terminal::new(backend).unwrap();
+
+        terminal.draw(ui).unwrap();
+
+        let buffer = terminal.backend().buffer();
+        let buffer_content = buffer
+            .content()
+            .iter()
+            .map(|cell| cell.symbol())
+            .collect::<String>();
+        assert!(buffer_content.contains("Foundry"));
+        assert!(buffer_content.contains("Welcome"));
+    }
+
+    #[test]
+    fn test_ui_layout_structure() {
+        let backend = TestBackend::new(40, 10);
+        let mut terminal = Terminal::new(backend).unwrap();
+
+        let result = terminal.draw(ui);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_ui_with_different_sizes() {
+        let sizes = [(20, 5), (80, 24), (120, 40)];
+
+        for (width, height) in sizes {
+            let backend = TestBackend::new(width, height);
+            let mut terminal = Terminal::new(backend).unwrap();
+
+            let result = terminal.draw(ui);
+            assert!(
+                result.is_ok(),
+                "UI should render properly with size {}x{}",
+                width,
+                height
+            );
+        }
+    }
 }
