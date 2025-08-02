@@ -53,9 +53,9 @@ These files are automatically applied by VS Code when relevant file patterns are
 ## Current State
 - **Binary**: Fully functional routing between CLI and TUI in `src/bin/foundry.rs`
 - **CLI Interface**: Working command-line interface with `--version` and `--help` flags
-- **TUI Interface**: Functional terminal UI with welcome screen and quit instructions
+- **TUI Interface**: Full-featured interactive terminal UI with command input, output display, cursor navigation, and comprehensive test coverage
 - **Libraries**: `src/lib.rs` and `crates/core/src/lib.rs` are empty placeholders ready for implementation
-- **Tests**: Comprehensive test suite with 16 tests covering all crates and integration scenarios
+- **Tests**: Comprehensive test suite with 16+ tests (12 TUI unit tests + 4 integration tests) covering all crates and integration scenarios
 - **Error Handling**: All crates use `anyhow::Result` for consistent error handling
 
 ## Key Files
@@ -77,7 +77,11 @@ These files are automatically applied by VS Code when relevant file patterns are
 
 ## Usage Patterns
 - **CLI Mode**: `foundry --version` or `foundry --help` for command-line operations
-- **TUI Mode**: `foundry` (no arguments) launches the interactive terminal interface
+- **TUI Mode**: `foundry` (no arguments) launches the interactive terminal interface with:
+  - Text input with cursor navigation (arrow keys)
+  - Command execution and output display
+  - Multi-panel layout (status, console, input, instructions)
+  - Exit with 'q' or 'Esc' keys
 
 ## Technical Architecture
 - Rust 2024 edition consistently across all crates in the workspace

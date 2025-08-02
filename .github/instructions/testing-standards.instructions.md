@@ -6,10 +6,11 @@ applyTo: "**/*.rs,**/tests/**"
 # Testing Standards
 
 ## Test Coverage Requirements
-- Maintain the established comprehensive test suite (16+ tests)
+- Maintain the established comprehensive test suite (16+ tests: 12 TUI unit tests + 4 integration tests)
 - Each new crate must include unit tests in its `src/lib.rs` file
 - Integration tests should be added to `tests/` directory for cross-crate functionality
 - Achieve meaningful test coverage for all public APIs and core functionality
+- TUI crate demonstrates excellent test coverage with 12 unit tests covering UI rendering, input handling, state management, and command execution
 
 ## Test Organization
 - **Unit Tests**: Place in `#[cfg(test)] mod tests` within each crate's `src/lib.rs`
@@ -20,7 +21,7 @@ applyTo: "**/*.rs,**/tests/**"
 ## Testing Tools and Patterns
 - Use standard Rust testing framework with `#[test]` attribute
 - For CLI testing: Use `clap::Command::try_get_matches_from()` for argument validation
-- For TUI testing: Use `ratatui::backend::TestBackend` for UI component testing
+- For TUI testing: Use `ratatui::backend::TestBackend` for UI component testing, test state management with `AppState`, and validate input handling with `crossterm::event::KeyEvent`
 - For integration testing: Use `std::process::Command` for binary execution tests
 - Keep comments minimal in test code - let test names be descriptive
 
