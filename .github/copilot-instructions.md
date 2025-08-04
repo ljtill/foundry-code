@@ -23,12 +23,20 @@ These files are automatically applied by VS Code when relevant file patterns are
 
 ## Build System & Tools
 - **Primary Tool**: `just` (Justfile) for common commands
-  - `just build` - Build the project
-  - `just run` - Run the binary
-  - `just test` - Run tests
+  - `just build` - Build the entire workspace
+  - `just build-pkg <package>` - Build a specific package
+  - `just release` - Build workspace in release mode
+  - `just run` - Run the foundry binary
+  - `just test` - Run all workspace tests
+  - `just test-pkg <package>` - Run tests for a specific package
   - `just check` - Run cargo check
-  - `just format` - Format code
+  - `just format` - Format check without writing changes
+  - `just format-fix` - Format the codebase
   - `just lint` - Run clippy linter
+  - `just lint-fix` - Run clippy with automatic fixes
+  - `just clean` - Clean the entire workspace
+  - `just clean-pkg <package>` - Clean a specific package
+  - `just deps-tree` - Show dependency tree
 - **Direct Cargo**: Standard Cargo commands work as expected
 - **Binary name**: `foundry` (defined in Cargo.toml)
 - **Built binary location**: `target/debug/foundry`
@@ -46,7 +54,7 @@ These files are automatically applied by VS Code when relevant file patterns are
   - Triggers on pushes and PRs to `main` branch
   - Uses custom `setup-just` action to install Just command runner
   - Parallel job execution: check, build, test, and lint jobs
-  - Uses `just` commands: `just check`, `just build --verbose`, `just test --verbose`, `just format --check`, `just lint`
+  - Uses `just` commands: `just check`, `just build`, `just test`, `just format`, `just lint`
   - Ubuntu latest runner with comprehensive validation pipeline
 - **Dependabot**: Configured for weekly Cargo updates and daily GitHub Actions updates
 
