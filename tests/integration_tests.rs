@@ -3,7 +3,7 @@ use std::process::Command;
 #[test]
 fn test_binary_exists() {
     let output = Command::new("cargo")
-        .args(&["build", "--bin", "foundry"])
+        .args(["build", "--bin", "foundry"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .output()
         .expect("Failed to execute cargo build");
@@ -14,7 +14,7 @@ fn test_binary_exists() {
 #[test]
 fn test_help_flag() {
     let output = Command::new("cargo")
-        .args(&["run", "--bin", "foundry", "--", "--help"])
+        .args(["run", "--bin", "foundry", "--", "--help"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .output()
         .expect("Failed to execute foundry --help");
@@ -27,7 +27,7 @@ fn test_help_flag() {
 #[test]
 fn test_version_flag() {
     let output = Command::new("cargo")
-        .args(&["run", "--bin", "foundry", "--", "--version"])
+        .args(["run", "--bin", "foundry", "--", "--version"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .output()
         .expect("Failed to execute foundry --version");
@@ -40,7 +40,7 @@ fn test_version_flag() {
 #[test]
 fn test_no_args_does_not_crash_immediately() {
     let mut child = Command::new("cargo")
-        .args(&["run", "--bin", "foundry"])
+        .args(["run", "--bin", "foundry"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .spawn()
         .expect("Failed to start foundry without arguments");

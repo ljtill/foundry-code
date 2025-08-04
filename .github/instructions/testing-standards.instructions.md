@@ -33,8 +33,8 @@ applyTo: "**/*.rs,**/tests/**"
 - Tests should run quickly and not require external dependencies
 
 ## Running Tests
-- Use `just test` or `cargo test` for all tests
-- Use `cargo test --package <crate-name>` for individual crate tests
+- Use `just test` for all tests
+- Use `just test-pkg <package>` for individual crate tests
 - Ensure all tests pass before committing changes
 - Tests are automatically run in CI pipeline
 

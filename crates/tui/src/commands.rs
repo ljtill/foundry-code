@@ -20,7 +20,7 @@ pub fn execute_command(command: &str) -> String {
             "".to_string()
         }
         _ => {
-            format!("Unknown command: {}", trimmed)
+            format!("Unknown command: {trimmed}")
         }
     }
 }

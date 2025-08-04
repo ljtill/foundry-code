@@ -15,7 +15,7 @@ pub fn handle_input(app: &mut AppState, key: KeyEvent) -> Result<()> {
         KeyCode::Enter => {
             if !app.input.is_empty() {
                 let command = app.input.clone();
-                app.add_output(format!("> {}", command));
+                app.add_output(format!("> {command}"));
                 let result = execute_command(&command);
                 app.add_output(result);
                 app.clear_input();
