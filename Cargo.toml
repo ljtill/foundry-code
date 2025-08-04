@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/core", "crates/cli", "crates/tui"]
+members = ["crates/core", "crates/terminal"]
 resolver = "2"
 
 [workspace.dependencies]
@@ -12,8 +12,8 @@ edition = "2024"
 
 [dependencies]
 anyhow = { workspace = true }
-foundry-cli = { path = "crates/cli" }
-foundry-tui = { path = "crates/tui" }
+clap = { version = "4.5", features = ["derive"] }
+foundry-terminal = { path = "crates/terminal" }
 
 [[bin]]
 name = "foundry"

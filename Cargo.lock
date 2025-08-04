@@ -309,21 +309,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2"
 
 [[package]]
-name = "foundry-cli"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "clap",
- "foundry-core",
-]
-
-[[package]]
 name = "foundry-code"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "foundry-cli",
- "foundry-tui",
+ "clap",
+ "foundry-terminal",
 ]
 
 [[package]]
@@ -334,7 +325,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "foundry-tui"
+name = "foundry-terminal"
 version = "0.1.0"
 dependencies = [
  "anyhow",

@@ -18,7 +18,7 @@ These files are automatically applied by VS Code when relevant file patterns are
 - **Workspace**: Multi-crate workspace with modular interface design
 - **Core Crate**: `crates/core` - `foundry-core` library crate for shared business logic
 - **CLI Crate**: `crates/cli` - `foundry-cli` library crate for command-line interface (using clap)
-- **TUI Crate**: `crates/tui` - `foundry-tui` library crate for terminal user interface (using ratatui)
+- **TUI Crate**: `crates/terminal` - `foundry-terminal` library crate for terminal user interface (using ratatui)
 - **Modular Design**: Feature crates organized in `crates/` directory following established patterns
 
 ## Build System & Tools
@@ -46,7 +46,7 @@ These files are automatically applied by VS Code when relevant file patterns are
 - **Root-level shared functionality**: `src/lib.rs` (currently unused)
 - **Core functionality**: `crates/core/src/lib.rs` (`foundry-core` crate) - Ready for shared business logic
 - **CLI interface**: `crates/cli/src/lib.rs` (`foundry-cli` crate) - Command-line interface with clap
-- **TUI interface**: `crates/tui/src/lib.rs` (`foundry-tui` crate) - Terminal UI with ratatui
+- **TUI interface**: `crates/terminal/src/lib.rs` (`foundry-terminal` crate) - Terminal UI with ratatui
 - **Workspace dependencies**: Managed at the root `Cargo.toml` level with workspace inheritance
 
 ## CI/CD Pipeline
@@ -70,7 +70,7 @@ These files are automatically applied by VS Code when relevant file patterns are
 - `Cargo.toml` - Root workspace configuration and binary definition
 - `crates/core/Cargo.toml` - Core library crate configuration
 - `crates/cli/Cargo.toml` - CLI crate configuration with clap dependency
-- `crates/tui/Cargo.toml` - TUI crate configuration with ratatui and crossterm dependencies
+- `crates/terminal/Cargo.toml` - TUI crate configuration with ratatui and crossterm dependencies
 - `Justfile` - Development command shortcuts
 - `src/bin/foundry.rs` - Main application entry point
 - `tests/integration_tests.rs` - Integration test suite for binary functionality
@@ -89,7 +89,7 @@ These files are automatically applied by VS Code when relevant file patterns are
   - Text input with cursor navigation (arrow keys)
   - Command execution and output display
   - Multi-panel layout (status, console, input, instructions)
-  - Exit with 'q' or 'Esc' keys
+  - Exit with 'Esc' key
 
 ## Technical Architecture
 - Rust 2024 edition consistently across all crates in the workspace
