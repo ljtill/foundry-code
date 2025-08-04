@@ -9,10 +9,10 @@ pub fn create_main_layout(area: Rect) -> (Layout, Rect) {
     let layout = Layout::default()
         .direction(Direction::Vertical)
         .constraints([
-            Constraint::Length(3), // Status box
-            Constraint::Min(0),    // Console output (expandable)
-            Constraint::Length(3), // Input box
-            Constraint::Length(3), // Instructions
+            Constraint::Length(3),
+            Constraint::Min(0),
+            Constraint::Length(3),
+            Constraint::Length(3),
         ]);
 
     (layout, padded_area)

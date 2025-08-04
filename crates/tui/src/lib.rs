@@ -61,8 +61,8 @@ mod tests {
         handle_input(&mut app, key).unwrap();
         assert_eq!(app.input, "h");
 
-        // Quit key should trigger quit state
-        let key = KeyEvent::new(KeyCode::Char('q'), KeyModifiers::NONE);
+        // Esc key should trigger quit state
+        let key = KeyEvent::new(KeyCode::Esc, KeyModifiers::NONE);
         handle_input(&mut app, key).unwrap();
         assert!(should_quit(&app));
     }

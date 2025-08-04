@@ -6,7 +6,7 @@ use crate::commands::execute_command;
 
 pub fn handle_input(app: &mut AppState, key: KeyEvent) -> Result<()> {
     match key.code {
-        KeyCode::Char('q') | KeyCode::Esc => {
+        KeyCode::Esc => {
             app.quit();
         }
         KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => {
@@ -18,6 +18,11 @@ pub fn handle_input(app: &mut AppState, key: KeyEvent) -> Result<()> {
                 app.add_output(format!("> {command}"));
                 let result = execute_command(&command);
                 app.add_output(result);
+
+                if command.trim() == "exit" {
+                    app.quit();
+                }
+
                 app.clear_input();
             }
         }
@@ -42,26 +47,16 @@ pub fn should_quit(app: &AppState) -> bool {
     app.should_quit
 }
 
-pub fn should_quit_key(key_code: KeyCode) -> bool {
-    matches!(key_code, KeyCode::Char('q') | KeyCode::Esc)
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test_handle_quit_keys() {
-        // Test all quit key combinations set should_quit flag
+        // Test quit key combinations set should_quit flag
         let mut app = AppState::default();
 
-        // 'q' key should trigger quit
-        let key = KeyEvent::new(KeyCode::Char('q'), KeyModifiers::NONE);
-        handle_input(&mut app, key).unwrap();
-        assert!(app.should_quit);
-
         // Esc key should trigger quit
-        app.should_quit = false;
         let key = KeyEvent::new(KeyCode::Esc, KeyModifiers::NONE);
         handle_input(&mut app, key).unwrap();
         assert!(app.should_quit);
@@ -150,5 +145,24 @@ mod tests {
 
         app.should_quit = true;
         assert!(should_quit(&app));
+    }
+
+    #[test]
+    fn test_exit_command_quits_app() {
+        // Test that typing "exit" command quits the application
+        let mut app = AppState::default();
+        app.input = "exit".to_string();
+
+        let key = KeyEvent::new(KeyCode::Enter, KeyModifiers::NONE);
+        handle_input(&mut app, key).unwrap();
+
+        // App should be set to quit after executing exit command
+        assert!(app.should_quit);
+        assert_eq!(app.input, ""); // Input should be cleared
+        assert!(
+            app.output_history
+                .iter()
+                .any(|line| line.contains("> exit"))
+        );
     }
 }
