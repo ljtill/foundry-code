@@ -46,8 +46,8 @@ mod tests {
         let app = AppState::default();
         assert_eq!(app.input, "");
         assert_eq!(app.cursor_position, 0);
-        assert!(app.output_history.is_empty());
-        assert_eq!(app.status_text, "Welcome to Azure AI Foundry Code!");
+        assert!(!app.output_history.is_empty());
+        assert_eq!(app.status_text, "🚀 Welcome to Azure AI Foundry Code!");
         assert!(!app.should_quit);
     }
 
@@ -83,10 +83,10 @@ mod tests {
         // Test command execution returns expected output
         use crate::commands::execute_command;
 
-        let result = execute_command("help");
-        assert!(result.contains("Available commands:"));
+        let result = execute_command("/help");
+        assert!(result.contains("Available System Commands"));
 
-        let result = execute_command("echo test");
-        assert_eq!(result, "test");
+        let result = execute_command("How are you?");
+        assert_eq!(result, "You said: How are you?");
     }
 }
