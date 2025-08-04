@@ -7,13 +7,24 @@ pub struct AppState {
     pub should_quit: bool,
 }
 
+use crate::commands::get_help_message;
+
+const DEFAULT_STATUS_MESSAGE: &str = "🚀 Welcome to Azure AI Foundry Code!";
+
 impl Default for AppState {
     fn default() -> Self {
+        let mut output_history = get_help_message()
+            .iter()
+            .map(|line| line.to_string())
+            .collect::<Vec<String>>();
+
+        output_history.push(String::new());
+
         Self {
             input: String::new(),
             cursor_position: 0,
-            output_history: Vec::new(),
-            status_text: "Welcome to Azure AI Foundry Code!".to_string(),
+            output_history,
+            status_text: DEFAULT_STATUS_MESSAGE.to_string(),
             should_quit: false,
         }
     }
@@ -76,8 +87,9 @@ mod tests {
         let state = AppState::default();
         assert_eq!(state.input, "");
         assert_eq!(state.cursor_position, 0);
-        assert_eq!(state.output_history.len(), 0);
-        assert_eq!(state.status_text, "Welcome to Azure AI Foundry Code!");
+        assert!(state.output_history.len() > 0);
+        assert!(state.output_history[0].contains("Available System Commands"));
+        assert_eq!(state.status_text, "🚀 Welcome to Azure AI Foundry Code!");
         assert!(!state.should_quit);
     }
 
@@ -146,9 +158,10 @@ mod tests {
     fn test_app_state_add_output() {
         // Test output history accumulation
         let mut state = AppState::default();
+        let initial_len = state.output_history.len();
         state.add_output("Test output".to_string());
-        assert_eq!(state.output_history.len(), 1);
-        assert_eq!(state.output_history[0], "Test output");
+        assert_eq!(state.output_history.len(), initial_len + 1);
+        assert_eq!(state.output_history[initial_len], "Test output");
     }
 
     #[test]

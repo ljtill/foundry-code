@@ -19,7 +19,7 @@ pub fn handle_input(app: &mut AppState, key: KeyEvent) -> Result<()> {
                 let result = execute_command(&command);
                 app.add_output(result);
 
-                if command.trim() == "exit" {
+                if command.trim() == "/exit" {
                     app.quit();
                 }
 
@@ -117,7 +117,7 @@ mod tests {
     fn test_handle_enter_key() {
         // Test enter executes command and adds to output history
         let mut app = AppState::default();
-        app.input = "echo test".to_string();
+        app.input = "/echo test".to_string();
 
         let initial_history_len = app.output_history.len();
 
@@ -133,7 +133,7 @@ mod tests {
         assert!(
             app.output_history
                 .iter()
-                .any(|line| line.contains("> echo test"))
+                .any(|line| line.contains("> /echo test"))
         );
     }
 
@@ -149,9 +149,9 @@ mod tests {
 
     #[test]
     fn test_exit_command_quits_app() {
-        // Test that typing "exit" command quits the application
+        // Test that typing "/exit" command quits the application
         let mut app = AppState::default();
-        app.input = "exit".to_string();
+        app.input = "/exit".to_string();
 
         let key = KeyEvent::new(KeyCode::Enter, KeyModifiers::NONE);
         handle_input(&mut app, key).unwrap();
@@ -162,7 +162,7 @@ mod tests {
         assert!(
             app.output_history
                 .iter()
-                .any(|line| line.contains("> exit"))
+                .any(|line| line.contains("> /exit"))
         );
     }
 }
