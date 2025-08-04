@@ -12,32 +12,6 @@ fn test_binary_exists() {
 }
 
 #[test]
-fn test_help_flag() {
-    let output = Command::new("cargo")
-        .args(["run", "--bin", "foundry", "--", "--help"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to execute foundry --help");
-
-    assert!(output.status.success());
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    assert!(stdout.contains("foundry") || stdout.contains("Usage"));
-}
-
-#[test]
-fn test_version_flag() {
-    let output = Command::new("cargo")
-        .args(["run", "--bin", "foundry", "--", "--version"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to execute foundry --version");
-
-    assert!(output.status.success());
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    assert!(!stdout.trim().is_empty());
-}
-
-#[test]
 fn test_no_args_does_not_crash_immediately() {
     let mut child = Command::new("cargo")
         .args(["run", "--bin", "foundry"])
@@ -52,4 +26,30 @@ fn test_no_args_does_not_crash_immediately() {
 
     let _ = child.kill();
     let _ = child.wait();
+}
+
+#[test]
+fn test_help_flag() {
+    let output = Command::new("cargo")
+        .args(["run", "--bin", "foundry", "--", "--help"])
+        .current_dir(env!("CARGO_MANIFEST_DIR"))
+        .output()
+        .expect("Failed to execute foundry --help");
+
+    assert!(output.status.success());
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    assert!(stdout.contains("Azure AI Foundry Code"));
+}
+
+#[test]
+fn test_version_flag() {
+    let output = Command::new("cargo")
+        .args(["run", "--bin", "foundry", "--", "--version"])
+        .current_dir(env!("CARGO_MANIFEST_DIR"))
+        .output()
+        .expect("Failed to execute foundry --version");
+
+    assert!(output.status.success());
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    assert!(stdout.contains(env!("CARGO_PKG_VERSION")));
 }
