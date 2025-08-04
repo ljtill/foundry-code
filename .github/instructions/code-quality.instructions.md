@@ -7,24 +7,22 @@ applyTo: "**/*.rs"
 
 ## Rust Best Practices
 - Follow project conventions and established coding style
-- Use Rust 2024 edition consistently across all crates (set `edition = "2024"` in all Cargo.toml files)
-- Use standard development tools as defined in the Justfile:
-  - `just format` for format validation without changes
-  - `just format-fix` for consistent formatting
-  - `just lint` for clippy linting
-  - `just lint-fix` for automatic clippy fixes
-  - `just check` for cargo check validation
+- Use Rust 2024 edition consistently across all crates
 - Implement proper error handling patterns using `anyhow::Result<()>` and `.context()` for descriptive errors
 - Include appropriate inline documentation for public APIs
+- Use idiomatic Rust patterns and follow community best practices
 
 ## Architecture Compliance
-- Respect the established modular crate organization (see copilot-instructions.md for details)
+- Respect the established modular crate organization
 - Follow the workspace dependency management patterns
-- Propose new crates in `crates/` directory for distinct feature sets
+- Maintain clear separation of concerns between crates
+- Propose new crates for distinct feature sets when appropriate
 
-## Testing Requirements
-- Write tests for new functionality (see testing-standards.instructions.md for details)
-- Run tests with `just test` to ensure they pass
+## Code Validation
+- Use standard Rust development tools for code quality
+- Ensure code passes format checks, linting, and compilation
+- Follow consistent formatting standards across the codebase
+- Address clippy warnings and suggestions appropriately
 
 ## Documentation Standards
 - Document public APIs with clear examples
