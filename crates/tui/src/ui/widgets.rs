@@ -59,7 +59,7 @@ pub fn create_instructions() -> Paragraph<'static> {
         Span::styled(": Execute command | ", Style::default().fg(Color::DarkGray)),
         Span::styled("←→", Style::default().fg(Color::DarkGray)),
         Span::styled(": Move cursor | ", Style::default().fg(Color::DarkGray)),
-        Span::styled("q/Esc", Style::default().fg(Color::DarkGray)),
+        Span::styled("Esc", Style::default().fg(Color::DarkGray)),
         Span::styled(": Quit", Style::default().fg(Color::DarkGray)),
     ])]);
 

@@ -8,12 +8,12 @@ pub fn execute_command(command: &str) -> String {
 
     match trimmed {
         "help" => {
-            "Available commands:\n- help: Show this help message\n- echo <text>: Echo the text\n- clear: Clear the screen\n- quit: Exit the application".to_string()
+            "Available commands:\n- help: Show this help message\n- echo <text>: Echo the text\n- clear: Clear the screen\n- exit: Exit the application".to_string()
         }
         "clear" => {
             "Screen cleared (simulated)".to_string()
         }
-        "quit" => {
+        "exit" => {
             "Goodbye!".to_string()
         }
         "" => {
@@ -35,6 +35,7 @@ mod tests {
         let result = execute_command("help");
         assert!(result.contains("Available commands:"));
         assert!(result.contains("help: Show this help message"));
+        assert!(result.contains("exit: Exit the application"));
     }
 
     #[test]
@@ -60,9 +61,9 @@ mod tests {
     }
 
     #[test]
-    fn test_execute_quit_command() {
-        // Test quit command returns goodbye message
-        let result = execute_command("quit");
+    fn test_execute_exit_command() {
+        // Test exit command returns goodbye message
+        let result = execute_command("exit");
         assert_eq!(result, "Goodbye!");
     }
 
