@@ -31,8 +31,8 @@ Only suggest crates that meet ALL of the following criteria:
 - Document the reasoning for version choices
 - Consider compatibility with existing dependencies
 
-## Crate Configuration Standards
-- Always use `edition = "2024"` for consistency across all crates
+## Workspace Organization
+- New crates should be placed in the `crates/` directory
+- Follow the established naming pattern: `foundry-{feature}`
+- Add new crate to workspace members in root `Cargo.toml`
 - Use workspace dependency inheritance where possible (e.g., `anyhow = { workspace = true }`)
-- Follow the established crate naming pattern: `foundry-{feature}`
-- Place new crates in the `crates/` directory (see copilot-instructions.md for structure details)

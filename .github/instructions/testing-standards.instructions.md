@@ -6,11 +6,11 @@ applyTo: "**/*.rs,**/tests/**"
 # Testing Standards
 
 ## Test Coverage Requirements
-- Maintain the established comprehensive test suite (16+ tests: 12 TUI unit tests + 4 integration tests)
+- Maintain comprehensive test coverage for all public APIs and core functionality
 - Each new crate must include unit tests in its `src/lib.rs` file
 - Integration tests should be added to `tests/` directory for cross-crate functionality
-- Achieve meaningful test coverage for all public APIs and core functionality
-- TUI crate demonstrates excellent test coverage with 12 unit tests covering UI rendering, input handling, state management, and command execution
+- Achieve meaningful test coverage that validates both success and failure scenarios
+- Maintain comprehensive test coverage across the workspace, including both integration and TUI unit tests
 
 ## Test Organization
 - **Unit Tests**: Place in `#[cfg(test)] mod tests` within each crate's `src/lib.rs`
@@ -21,9 +21,10 @@ applyTo: "**/*.rs,**/tests/**"
 ## Testing Tools and Patterns
 - Use standard Rust testing framework with `#[test]` attribute
 - For CLI testing: Use `clap::Command::try_get_matches_from()` for argument validation
-- For TUI testing: Use `ratatui::backend::TestBackend` for UI component testing, test state management with `AppState`, and validate input handling with `crossterm::event::KeyEvent`
+- For TUI testing: Use `ratatui::backend::TestBackend` for UI component testing
 - For integration testing: Use `std::process::Command` for binary execution tests
-- Keep comments minimal in test code - let test names be descriptive
+- Test state management, input handling, and component behavior appropriately
+- Keep test code clean and focused - let test names be descriptive
 
 ## Test Quality Standards
 - Tests should be deterministic and not depend on external state
@@ -33,10 +34,10 @@ applyTo: "**/*.rs,**/tests/**"
 - Tests should run quickly and not require external dependencies
 
 ## Running Tests
-- Use `just test` for all tests
-- Use `just test-pkg <package>` for individual crate tests
+- Use the project's build system to run tests consistently
+- Test individual crates separately when focusing on specific functionality
 - Ensure all tests pass before committing changes
-- Tests are automatically run in CI pipeline
+- Tests are automatically validated in the CI pipeline
 
 ## Test Maintenance
 - Update tests when modifying functionality
