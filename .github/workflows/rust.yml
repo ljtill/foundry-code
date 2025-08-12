@@ -13,7 +13,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run check
@@ -22,7 +22,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run format
@@ -31,7 +31,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run lint
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: check
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run build
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: check
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ./.github/actions/setup-cache
     - uses: ./.github/actions/setup-just
     - name: Run test
